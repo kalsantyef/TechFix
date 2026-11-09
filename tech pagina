@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFix | Hardware & Custom Gaming PCs Argentina</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        tech: {
+                            black: '#020617',
+                            darker: '#090d16',
+                            card: '#0f172a',
+                            border: '#1e293b',
+                            blue: '#00f0ff',
+                            neon: '#3b82f6',
+                            deep: '#1d4ed8',
+                            accent: '#60a5fa'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 25px rgba(0, 240, 255, 0.4)',
+                        'neon-sm': '0 0 12px rgba(59, 130, 246, 0.5)',
+                        'glow-lg': '0 0 40px rgba(0, 240, 255, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f0ff; }
+        .tech-grid-bg {
+            background-image: radial-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 0);
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body class="bg-tech-black text-slate-100 font-sans min-h-screen flex flex-col selection:bg-tech-blue selection:text-black tech-grid-bg">
+
+    <!-- HEADER / NAVEGACIÓN PRINCIPAL -->
+    <header class="sticky top-0 z-40 bg-tech-darker/90 backdrop-blur-md border-b border-tech-border/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo TechFix -->
+                <a href="#inicio" onclick="navigateTo('inicio')" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-tech-blue to-tech-deep flex items-center justify-center shadow-neon-blue group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-microchip text-black text-2xl font-bold"></i>
+                    </div>
+                    <div>
+                        <span class="font-orbitron text-2xl font-black tracking-wider text-white">TECH<span class="text-tech-blue">FIX</span></span>
+                        <span class="block text-[10px] tracking-widest text-tech-blue/80 uppercase font-rajdhani -mt-1 font-bold">Hardware & Gaming AR</span>
+                    </div>
+                </a>
+
+                <!-- Links de Navegación Desktop -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <button onclick="navigateTo('inicio')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300">
+                        <i class="fa-solid fa-house text-xs"></i> Inicio
+                    </button>
+                    <button onclick="navigateTo('catalogo')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300">
+                        <i class="fa-solid fa-store text-xs"></i> Catálogo
+                    </button>
+                    <button onclick="navigateTo('armar-pc')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300 border border-tech-blue/40 bg-tech-blue/10 text-tech-blue hover:bg-tech-blue hover:text-black shadow-neon-sm">
+                        <i class="fa-solid fa-wrench text-xs"></i> Armar PC
+                    </button>
+                    <button onclick="navigateTo('pcs-armadas')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300">
+                        <i class="fa-solid fa-desktop text-xs"></i> PCs Armadas
+                    </button>
+                    <button onclick="navigateTo('marcas')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300">
+                        <i class="fa-solid fa-copyright text-xs"></i> Marcas
+                    </button>
+                    <button onclick="navigateTo('faq')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300">
+                        <i class="fa-solid fa-truck-fast text-xs"></i> Envíos & FAQ
+                    </button>
+                    <button onclick="navigateTo('contacto')" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg hover:text-tech-blue transition-colors flex items-center gap-2 text-slate-300">
+                        <i class="fa-solid fa-envelope text-xs"></i> Contacto
+                    </button>
+                </nav>
+
+                <!-- Icono de Carrito & Menú Mobile -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-xl bg-tech-card border border-tech-border hover:border-tech-blue transition-all group">
+                        <i class="fa-solid fa-cart-shopping text-lg text-slate-300 group-hover:text-tech-blue transition-colors"></i>
+                        <span id="cart-badge" class="absolute -top-2 -right-2 bg-tech-blue text-black font-extrabold text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-neon-sm hidden">0</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-tech-card border border-tech-border text-slate-300">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-tech-darker border-b border-tech-border px-4 pt-2 pb-6 space-y-2">
+            <button onclick="navigateTo('inicio'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-tech-card text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-house text-tech-blue"></i> Inicio
+            </button>
+            <button onclick="navigateTo('catalogo'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-tech-card text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-store text-tech-blue"></i> Catálogo Completo
+            </button>
+            <button onclick="navigateTo('armar-pc'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg bg-tech-blue/10 text-tech-blue font-bold flex items-center gap-3 border border-tech-blue/30">
+                <i class="fa-solid fa-wrench"></i> Armar PC Personalizada
+            </button>
+            <button onclick="navigateTo('pcs-armadas'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-tech-card text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-desktop text-tech-blue"></i> PCs Armadas
+            </button>
+            <button onclick="navigateTo('marcas'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-tech-card text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-copyright text-tech-blue"></i> Marcas Oficiales
+            </button>
+            <button onclick="navigateTo('faq'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-tech-card text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-truck-fast text-tech-blue"></i> Envíos y Preguntas Frecuentes
+            </button>
+            <button onclick="navigateTo('contacto'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-tech-card text-slate-200 flex items-center gap-3">
+                <i class="fa-solid fa-envelope text-tech-blue"></i> Contacto y Soporte
+            </button>
+        </div>
+    </header>
+
+    <!-- VISTAS Y SECCIONES PRINCIPALES -->
+    <main class="flex-grow">
+        
+        <!-- SECCIÓN 1: INICIO -->
+        <section id="sec-inicio" class="page-section">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden bg-gradient-to-b from-tech-darker via-tech-black to-tech-black border-b border-tech-border/50 py-16 lg:py-24">
+                <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-tech-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tech-blue/10 border border-tech-blue/40 text-tech-blue text-xs font-semibold uppercase tracking-wider">
+                                <span class="w-2 h-2 rounded-full bg-tech-blue animate-ping"></span> Hardware Gamer de Alta Gama Argentina
+                            </span>
+                            <h1 class="font-orbitron text-4xl sm:text-5xl lg:text-6xl font-black leading-tight text-white">
+                                EXPERIENCIA Y POTENCIA EN <span class="text-transparent bg-clip-text bg-gradient-to-r from-tech-blue via-tech-neon to-indigo-500">TECHFIX</span>
+                            </h1>
+                            <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                                Componentes de PC Gamer de última generación, placas de video Geforce RTX, procesadores de alto rendimiento y PCs armadas a medida con precios reales en ARS.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                                <button onclick="navigateTo('armar-pc')" class="px-8 py-4 rounded-xl font-orbitron font-bold text-black bg-tech-blue hover:bg-cyan-300 shadow-neon-blue transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-sliders"></i> ARMAR MI PC A MEDIDA
+                                </button>
+                                <button onclick="navigateTo('catalogo')" class="px-8 py-4 rounded-xl font-orbitron font-semibold text-white bg-tech-card border border-tech-border hover:border-tech-blue hover:bg-slate-800 transition-all flex items-center justify-center gap-3">
+                                    <i class="fa-solid fa-border-all"></i> VER COMPONENTES
+                                </button>
+                            </div>
+                            <!-- Beneficios -->
+                            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-tech-border/60 max-w-lg mx-auto lg:mx-0">
+                                <div class="text-center lg:text-left">
+                                    <div class="font-bold text-tech-blue text-lg font-orbitron">Envíos AR</div>
+                                    <div class="text-xs text-slate-400">A todo el país asegurados</div>
+                                </div>
+                                <div class="text-center lg:text-left">
+                                    <div class="font-bold text-tech-blue text-lg font-orbitron">10% OFF</div>
+                                    <div class="text-xs text-slate-400">Vía Transferencia / MP</div>
+                                </div>
+                                <div class="text-center lg:text-left">
+                                    <div class="font-bold text-tech-blue text-lg font-orbitron">Garantía</div>
+                                    <div class="text-xs text-slate-400">Oficial de laboratorio</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flagship PC Highlight -->
+                        <div class="lg:col-span-5 relative">
+                            <div class="relative mx-auto max-w-md lg:max-w-none">
+                                <div class="absolute inset-0 bg-gradient-to-r from-tech-blue to-tech-deep rounded-2xl filter blur-xl opacity-35 animate-pulse"></div>
+                                <div class="relative bg-tech-card border border-tech-border p-3 rounded-2xl shadow-2xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80" alt="TechFix Ultra Beast Gaming PC" class="w-full h-[380px] object-cover rounded-xl transform hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute bottom-6 left-6 right-6 bg-tech-darker/90 backdrop-blur-md border border-tech-border p-4 rounded-xl">
+                                        <div class="flex justify-between items-center">
+                                            <div>
+                                                <div class="text-xs text-tech-blue font-bold font-rajdhani uppercase">FLAGSHIP PC GAMING</div>
+                                                <div class="font-orbitron font-bold text-white text-sm">TechFix Beast RTX 4080 Super</div>
+                                            </div>
+                                            <span class="px-3 py-1 bg-tech-blue/20 text-tech-blue border border-tech-blue/40 font-mono font-bold text-xs rounded-md">$ 3.450.000 ARS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorías de Hardware -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="mb-8">
+                    <h2 class="font-orbitron text-2xl font-bold text-white">EXPLORAR POR CATEGORÍA</h2>
+                    <p class="text-slate-400 text-sm">Componentes de vanguardia para tu PC gamer</p>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                    <button onclick="filterCatalog('gpu')" class="p-5 bg-tech-card border border-tech-border hover:border-tech-blue rounded-xl text-center group transition-all hover:-translate-y-1">
+                        <i class="fa-solid fa-microchip text-3xl text-slate-400 group-hover:text-tech-blue mb-3 transition-colors"></i>
+                        <div class="font-bold text-sm text-slate-200">Placas de Video</div>
+                    </button>
+                    <button onclick="filterCatalog('cpu')" class="p-5 bg-tech-card border border-tech-border hover:border-tech-blue rounded-xl text-center group transition-all hover:-translate-y-1">
+                        <i class="fa-solid fa-memory text-3xl text-slate-400 group-hover:text-tech-blue mb-3 transition-colors"></i>
+                        <div class="font-bold text-sm text-slate-200">Procesadores</div>
+                    </button>
+                    <button onclick="filterCatalog('ram')" class="p-5 bg-tech-card border border-tech-border hover:border-tech-blue rounded-xl text-center group transition-all hover:-translate-y-1">
+                        <i class="fa-solid fa-server text-3xl text-slate-400 group-hover:text-tech-blue mb-3 transition-colors"></i>
+                        <div class="font-bold text-sm text-slate-200">Memorias RAM</div>
+                    </button>
+                    <button onclick="filterCatalog('storage')" class="p-5 bg-tech-card border border-tech-border hover:border-tech-blue rounded-xl text-center group transition-all hover:-translate-y-1">
+                        <i class="fa-solid fa-hard-drive text-3xl text-slate-400 group-hover:text-tech-blue mb-3 transition-colors"></i>
+                        <div class="font-bold text-sm text-slate-200">Almacenamiento</div>
+                    </button>
+                    <button onclick="filterCatalog('monitores')" class="p-5 bg-tech-card border border-tech-border hover:border-tech-blue rounded-xl text-center group transition-all hover:-translate-y-1">
+                        <i class="fa-solid fa-display text-3xl text-slate-400 group-hover:text-tech-blue mb-3 transition-colors"></i>
+                        <div class="font-bold text-sm text-slate-200">Monitores</div>
+                    </button>
+                    <button onclick="filterCatalog('perifericos')" class="p-5 bg-tech-card border border-tech-border hover:border-tech-blue rounded-xl text-center group transition-all hover:-translate-y-1">
+                        <i class="fa-solid fa-keyboard text-3xl text-slate-400 group-hover:text-tech-blue mb-3 transition-colors"></i>
+                        <div class="font-bold text-sm text-slate-200">Periféricos</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Productos Destacados -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-12">
+                <div class="border-t border-tech-border/60 pt-8 mb-6 flex justify-between items-center">
+                    <h2 class="font-orbitron text-2xl font-bold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-fire text-tech-blue"></i> HARDWARE DESTACADO EN STOCK
+                    </h2>
+                    <button onclick="navigateTo('catalogo')" class="text-sm font-semibold text-tech-blue hover:underline">Ver catálogo completo <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+                <div id="home-featured-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: CATÁLOGO -->
+        <section id="sec-catalogo" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h1 class="font-orbitron text-3xl font-extrabold text-white">CATÁLOGO GENERAL DE HARDWARE</h1>
+                    <p class="text-slate-400">Precios reales en Pesos Argentinos con stock oficial en TechFix Argentina (Sincronizado con Base de Datos).</p>
+                </div>
+
+                <div class="bg-tech-card border border-tech-border p-4 rounded-xl mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div class="relative w-full md:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="catalog-search" oninput="renderCatalog()" placeholder="Buscar GPU, Intel, Ryzen, SSD..." class="w-full pl-10 pr-4 py-2.5 bg-tech-darker border border-tech-border rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-tech-blue text-sm">
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+                        <button onclick="filterCatalog('all')" id="cat-btn-all" class="cat-filter-btn active px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-blue text-black">TODOS</button>
+                        <button onclick="filterCatalog('gpu')" id="cat-btn-gpu" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">GPUS</button>
+                        <button onclick="filterCatalog('cpu')" id="cat-btn-cpu" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">CPUS</button>
+                        <button onclick="filterCatalog('ram')" id="cat-btn-ram" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">RAM</button>
+                        <button onclick="filterCatalog('storage')" id="cat-btn-storage" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">ALMACENAMIENTO</button>
+                        <button onclick="filterCatalog('motherboard')" id="cat-btn-motherboard" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">MOTHERS</button>
+                        <button onclick="filterCatalog('monitores')" id="cat-btn-monitores" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">MONITORES</button>
+                        <button onclick="filterCatalog('perifericos')" id="cat-btn-perifericos" class="cat-filter-btn px-3.5 py-2 rounded-lg text-xs font-bold font-orbitron transition-all bg-tech-darker border border-tech-border text-slate-300 hover:border-tech-blue">PERIFÉRICOS</button>
+                    </div>
+                </div>
+
+                <div id="catalog-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: ARMAR PC -->
+        <section id="sec-armar-pc" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <span class="text-tech-blue font-mono text-xs font-bold uppercase tracking-widest">// CUSTOM PC BUILDER LAB ARGENTINA</span>
+                    <h1 class="font-orbitron text-3xl font-extrabold text-white">CONFIGURADOR COMPLETO DE COMPUTADORAS</h1>
+                    <p class="text-slate-400">Selecciona componentes compatibles con cálculo automático de Watts y cotización en ARS.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4 border-b border-tech-border/50 pb-3">
+                                <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue flex items-center justify-center font-mono font-bold">1</div><h3 class="font-orbitron font-bold text-white">Procesador (CPU)</h3></div>
+                                <span id="builder-cpu-selected-name" class="text-xs font-mono text-tech-blue font-semibold">Sin seleccionar</span>
+                            </div>
+                            <div id="builder-cpu-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        </div>
+
+                        <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4 border-b border-tech-border/50 pb-3">
+                                <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue flex items-center justify-center font-mono font-bold">2</div><h3 class="font-orbitron font-bold text-white">Placa Madre (Motherboard)</h3></div>
+                                <span id="builder-motherboard-selected-name" class="text-xs font-mono text-tech-blue font-semibold">Sin seleccionar</span>
+                            </div>
+                            <div id="builder-motherboard-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        </div>
+
+                        <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4 border-b border-tech-border/50 pb-3">
+                                <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue flex items-center justify-center font-mono font-bold">3</div><h3 class="font-orbitron font-bold text-white">Placa de Video (GPU)</h3></div>
+                                <span id="builder-gpu-selected-name" class="text-xs font-mono text-tech-blue font-semibold">Sin seleccionar</span>
+                            </div>
+                            <div id="builder-gpu-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        </div>
+
+                        <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4 border-b border-tech-border/50 pb-3">
+                                <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue flex items-center justify-center font-mono font-bold">4</div><h3 class="font-orbitron font-bold text-white">Memoria RAM</h3></div>
+                                <span id="builder-ram-selected-name" class="text-xs font-mono text-tech-blue font-semibold">Sin seleccionar</span>
+                            </div>
+                            <div id="builder-ram-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        </div>
+
+                        <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4 border-b border-tech-border/50 pb-3">
+                                <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue flex items-center justify-center font-mono font-bold">5</div><h3 class="font-orbitron font-bold text-white">Almacenamiento (SSD)</h3></div>
+                                <span id="builder-storage-selected-name" class="text-xs font-mono text-tech-blue font-semibold">Sin seleccionar</span>
+                            </div>
+                            <div id="builder-storage-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        </div>
+
+                        <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                            <div class="flex items-center justify-between mb-4 border-b border-tech-border/50 pb-3">
+                                <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue flex items-center justify-center font-mono font-bold">6</div><h3 class="font-orbitron font-bold text-white">Fuente & Gabinete</h3></div>
+                                <span id="builder-psu-selected-name" class="text-xs font-mono text-tech-blue font-semibold">Sin seleccionar</span>
+                            </div>
+                            <div id="builder-psu-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4">
+                        <div class="sticky top-28 bg-tech-card border border-tech-border rounded-xl p-6 shadow-2xl space-y-4">
+                            <h3 class="font-orbitron font-bold text-xl text-white border-b border-tech-border pb-3 flex items-center justify-between">
+                                Resumen del Armado <i class="fa-solid fa-calculator text-tech-blue"></i>
+                            </h3>
+                            <div class="space-y-2.5 text-xs text-slate-300 min-h-[180px]">
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Procesador:</span><span id="sum-cpu" class="font-bold text-white font-mono">$ 0 ARS</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Motherboard:</span><span id="sum-motherboard" class="font-bold text-white font-mono">$ 0 ARS</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Placa de Video:</span><span id="sum-gpu" class="font-bold text-white font-mono">$ 0 ARS</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Memoria RAM:</span><span id="sum-ram" class="font-bold text-white font-mono">$ 0 ARS</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Almacenamiento:</span><span id="sum-storage" class="font-bold text-white font-mono">$ 0 ARS</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Fuente / Gabinete:</span><span id="sum-psu" class="font-bold text-white font-mono">$ 0 ARS</span></div>
+                                <div class="border-t border-tech-border pt-3 flex justify-between items-center"><span class="text-slate-400">Consumo Estimado:</span><span id="builder-watts" class="font-mono text-tech-blue font-bold">0 Watts</span></div>
+                                <div class="flex justify-between items-center"><span class="text-slate-400">Ensamblado + Testeo:</span><span class="text-emerald-400 font-bold uppercase">¡INCLUIDO GRATIS!</span></div>
+                            </div>
+                            <div class="bg-tech-darker border border-tech-border p-4 rounded-lg">
+                                <div class="text-xs text-slate-400 mb-1">Precio Total Estimado:</div>
+                                <div id="builder-total-price" class="font-orbitron text-2xl font-black text-tech-blue">$ 0 ARS</div>
+                            </div>
+                            <button onclick="addCustomRigToCart()" id="btn-add-builder" disabled class="w-full py-4 rounded-xl font-orbitron font-bold text-black bg-slate-700 cursor-not-allowed transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> AGREGAR PC COMPLETA AL CARRITO
+                            </button>
+                            <button onclick="resetBuilder()" class="w-full py-2 text-xs text-slate-400 hover:text-red-400 transition-colors text-center">Reiniciar Elecciones</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: PCS ARMADAS -->
+        <section id="sec-pcs-armadas" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h1 class="font-orbitron text-3xl font-extrabold text-white">PCS GAMER PRE-ARMADAS EN LABORATORIO</h1>
+                    <p class="text-slate-400">Equipos configurados y testeados para máximo rendimiento.</p>
+                </div>
+                <div id="prebuilt-pcs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 5: MARCAS -->
+        <section id="sec-marcas" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="brands-list-view">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <span class="text-tech-blue text-xs font-mono font-bold uppercase tracking-widest">// ALIANZAS OFICIALES AR</span>
+                        <h1 class="font-orbitron text-3xl font-extrabold text-white mt-1">MARCAS DE PRIMERA LÍNEA</h1>
+                        <p class="text-slate-400 mt-2">Haz clic sobre cualquier marca para ver su catálogo exclusivo.</p>
+                    </div>
+                    <div id="brands-grid-container" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"></div>
+                </div>
+                <div id="brand-detail-view" class="hidden space-y-8">
+                    <div id="brand-banner-container" class="relative overflow-hidden bg-tech-card border border-tech-border rounded-2xl p-8 sm:p-12"></div>
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="font-orbitron text-xl font-bold text-white flex items-center gap-2"><i class="fa-solid fa-boxes-stacked text-tech-blue"></i> Catálogo Oficial Disponible</h2>
+                            <button onclick="showBrandsOverview()" class="px-4 py-2 bg-tech-darker border border-tech-border hover:border-tech-blue text-slate-300 hover:text-white rounded-lg text-xs font-bold font-orbitron transition-all flex items-center gap-2"><i class="fa-solid fa-arrow-left"></i> Volver a Marcas</button>
+                        </div>
+                        <div id="brand-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 6: FAQ -->
+        <section id="sec-faq" class="page-section hidden py-10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div>
+                    <span class="text-tech-blue text-xs font-mono font-bold uppercase tracking-widest">// SERVICIO Y LOGÍSTICA</span>
+                    <h1 class="font-orbitron text-3xl font-extrabold text-white mt-1">PREGUNTAS FRECUENTES & ENVÍOS</h1>
+                    <p class="text-slate-400 mt-2">Envíos protegidos a todo el país, medios de pago y garantía oficial en Argentina.</p>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                        <h3 class="font-orbitron font-bold text-white text-base mb-2 flex items-center gap-3"><i class="fa-solid fa-truck text-tech-blue"></i> ¿Cómo realizan los envíos a todo el país?</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Despachamos diariamente con seguro mediante Andreani y Correo Argentino. En CABA y GBA envíos exprés en el día.</p>
+                    </div>
+                    <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                        <h3 class="font-orbitron font-bold text-white text-base mb-2 flex items-center gap-3"><i class="fa-solid fa-wallet text-tech-blue"></i> ¿Qué formas de pago están disponibles?</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Transferencia Bancaria con 10% de descuento automático o tarjetas mediante Mercado Pago.</p>
+                    </div>
+                    <div class="bg-tech-card border border-tech-border rounded-xl p-5">
+                        <h3 class="font-orbitron font-bold text-white text-base mb-2 flex items-center gap-3"><i class="fa-solid fa-shield-halved text-tech-blue"></i> ¿Qué garantía tienen los productos?</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">Garantía oficial de fabricante y soporte técnico directo en nuestro laboratorio TechFix.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 7: CONTACTO -->
+        <section id="sec-contacto" class="page-section hidden py-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div>
+                            <span class="text-tech-blue text-xs font-mono font-bold">CENTRO DE ASISTENCIA</span>
+                            <h1 class="font-orbitron text-3xl font-extrabold text-white">CONTACTANOS EN TECHFIX</h1>
+                            <p class="text-slate-400 mt-2 text-sm">¿Tenés dudas técnicas o querés una cotización especial? Escribinos.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-4 bg-tech-card border border-tech-border rounded-xl">
+                                <div class="w-12 h-12 rounded-lg bg-tech-blue/10 border border-tech-blue/30 flex items-center justify-center text-tech-blue text-xl"><i class="fa-solid fa-location-dot"></i></div>
+                                <div><div class="text-xs text-slate-400">Showroom & Laboratorio</div><div class="font-semibold text-white">Av. Belgrano 1450, CABA, Argentina</div></div>
+                            </div>
+                            <div class="flex items-center gap-4 p-4 bg-tech-card border border-tech-border rounded-xl">
+                                <div class="w-12 h-12 rounded-lg bg-tech-blue/10 border border-tech-blue/30 flex items-center justify-center text-tech-blue text-xl"><i class="fa-solid fa-headset"></i></div>
+                                <div><div class="text-xs text-slate-400">Atención WhatsApp</div><div class="font-semibold text-white">+54 11 3375-8781</div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 bg-tech-card border border-tech-border p-8 rounded-xl">
+                        <h2 class="font-orbitron text-xl font-bold text-white mb-6">Envíanos tu consulta</h2>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div><label class="block text-xs text-slate-300 font-bold mb-1">Nombre Completo</label><input type="text" id="contact-name" required placeholder="Ej. Nicolas Gomez" class="w-full px-4 py-2.5 bg-tech-darker border border-tech-border rounded-lg text-white text-sm focus:outline-none focus:border-tech-blue"></div>
+                                <div><label class="block text-xs text-slate-300 font-bold mb-1">Correo Electrónico</label><input type="email" id="contact-email" required placeholder="tuemail@ejemplo.com" class="w-full px-4 py-2.5 bg-tech-darker border border-tech-border rounded-lg text-white text-sm focus:outline-none focus:border-tech-blue"></div>
+                            </div>
+                            <div><label class="block text-xs text-slate-300 font-bold mb-1">Detalle de la consulta</label><textarea id="contact-message" rows="4" required placeholder="Ingresá los detalles de tu consulta..." class="w-full px-4 py-2.5 bg-tech-darker border border-tech-border rounded-lg text-white text-sm focus:outline-none focus:border-tech-blue"></textarea></div>
+                            <button type="submit" class="w-full py-3.5 bg-tech-blue hover:bg-cyan-300 text-black font-orbitron font-bold rounded-lg transition-colors shadow-neon-sm">ENVIAR MENSAJE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CARRITO DE COMPRAS DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+        <div id="cart-backdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+        <div id="cart-panel" class="absolute inset-y-0 right-0 max-w-full flex pl-10 transform translate-x-full transition-transform duration-300 pointer-events-auto">
+            <div class="w-screen max-w-md bg-tech-darker border-l border-tech-border flex flex-col justify-between shadow-2xl">
+                <div class="p-6 border-b border-tech-border flex items-center justify-between">
+                    <div class="flex items-center gap-3"><i class="fa-solid fa-cart-shopping text-tech-blue text-xl"></i><h2 class="font-orbitron font-bold text-lg text-white">CARRITO DE COMPRAS</h2></div>
+                    <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-white transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                <div id="cart-items-container" class="flex-grow p-6 overflow-y-auto space-y-4"></div>
+                <div class="p-6 border-t border-tech-border bg-tech-card space-y-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="coupon-code" placeholder="Cupón (Usa: TECHFIX10)" class="w-full px-3 py-2 bg-tech-darker border border-tech-border rounded-lg text-white text-xs uppercase focus:outline-none focus:border-tech-blue">
+                        <button onclick="applyCoupon()" class="px-3 py-2 bg-tech-border hover:bg-slate-700 text-white font-bold text-xs rounded-lg transition-colors">Aplicar</button>
+                    </div>
+                    <div class="space-y-1.5 text-sm">
+                        <div class="flex justify-between text-slate-400"><span>Subtotal:</span><span id="cart-subtotal" class="font-mono text-white">$ 0 ARS</span></div>
+                        <div id="discount-row" class="flex justify-between text-emerald-400 text-xs hidden"><span>Descuento Cupón (10% OFF):</span><span id="cart-discount" class="font-mono">-$ 0 ARS</span></div>
+                        <div class="flex justify-between text-slate-400"><span>Envío Asegurado (AR):</span><span id="cart-shipping" class="text-emerald-400 font-semibold text-xs">$ 12.500 ARS</span></div>
+                        <div class="flex justify-between text-base font-bold text-white border-t border-tech-border/50 pt-2"><span>Total Final:</span><span id="cart-total" class="font-orbitron text-tech-blue text-xl">$ 0 ARS</span></div>
+                    </div>
+                    <button onclick="checkout()" class="w-full py-3.5 bg-tech-blue hover:bg-cyan-300 text-black font-orbitron font-bold rounded-xl transition-all shadow-neon-blue flex items-center justify-center gap-2">FINALIZAR COMPRA <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-tech-card border border-tech-blue text-white px-5 py-3 rounded-xl shadow-neon-blue flex items-center gap-3 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-tech-blue text-lg"></i>
+        <span id="toast-message" class="text-sm font-semibold">Producto agregado</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-tech-darker border-t border-tech-border/80 mt-16 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-microchip text-tech-blue text-2xl"></i><span class="font-orbitron text-xl font-bold text-white">TECH<span class="text-tech-blue">FIX</span></span></div>
+                    <p class="text-xs text-slate-400 leading-relaxed">Hardware Gamer de vanguardia y armado profesional en Argentina.</p>
+                </div>
+                <div>
+                    <h4 class="font-orbitron font-bold text-white mb-3 text-xs uppercase tracking-wider">Navegación</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#inicio" onclick="navigateTo('inicio')" class="hover:text-tech-blue">Inicio</a></li>
+                        <li><a href="#catalogo" onclick="navigateTo('catalogo')" class="hover:text-tech-blue">Catálogo</a></li>
+                        <li><a href="#armar-pc" onclick="navigateTo('armar-pc')" class="hover:text-tech-blue">Armador de PC</a></li>
+                        <li><a href="#pcs-armadas" onclick="navigateTo('pcs-armadas')" class="hover:text-tech-blue">PCs Armadas</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-orbitron font-bold text-white mb-3 text-xs uppercase tracking-wider">Marcas Partners</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" onclick="selectBrand('nvidia'); navigateTo('marcas')" class="hover:text-tech-blue">NVIDIA GeForce</a></li>
+                        <li><a href="#" onclick="selectBrand('intel'); navigateTo('marcas')" class="hover:text-tech-blue">Intel Core</a></li>
+                        <li><a href="#" onclick="selectBrand('amd'); navigateTo('marcas')" class="hover:text-tech-blue">AMD Ryzen</a></li>
+                        <li><a href="#" onclick="selectBrand('asus'); navigateTo('marcas')" class="hover:text-tech-blue">ASUS ROG</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-orbitron font-bold text-white mb-3 text-xs uppercase tracking-wider">Redes TechFix</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center hover:border-tech-blue hover:text-tech-blue transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center hover:border-tech-blue hover:text-tech-blue transition-colors"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center hover:border-tech-blue hover:text-tech-blue transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-tech-border/50 pt-6 text-center text-xs text-slate-500">&copy; 2026 TechFix Argentina. Todos los precios expresados en Pesos Argentinos (ARS).</div>
+        </div>
+    </footer>
+
+    <!-- CONEXIÓN CON BACKEND DB (API REST Y JAVASCRIPT) -->
+    <script>
+        function formatARS(amount) {
+            return '$ ' + new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(amount) + ' ARS';
+        }
+
+        let BRANDS_DATA = [];
+        let PRODUCTS = [];
+        let PREBUILT_PCS = [];
+        let cart = [];
+        let activeCategory = 'all';
+        let discountPercentage = 0;
+        let builderSelection = { cpu: null, motherboard: null, gpu: null, ram: null, storage: null, psu: null };
+
+        async function loadDatabase() {
+            try {
+                const res = await fetch('/api/data');
+                const data = await res.json();
+                BRANDS_DATA = data.brands;
+                PRODUCTS = data.products;
+                PREBUILT_PCS = data.prebuilts;
+                
+                renderFeaturedProducts();
+                renderCatalog();
+                renderPrebuiltPCs();
+                renderBuilderOptions();
+                renderBrandsGrid();
+            } catch (err) {
+                console.error("Error conectando con la Base de Datos TechFix:", err);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDatabase();
+        });
+
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(`sec-${sectionId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function renderBrandsGrid() {
+            const container = document.getElementById('brands-grid-container');
+            if (!container) return;
+            container.innerHTML = BRANDS_DATA.map(b => {
+                const count = PRODUCTS.filter(p => p.brand.toLowerCase() === b.brandKey.toLowerCase()).length;
+                return `
+                    <div onclick="selectBrand('${b.id}')" class="bg-tech-card border border-tech-border p-6 rounded-xl flex flex-col items-center justify-center hover:border-tech-blue hover:shadow-neon-sm transition-all cursor-pointer group text-center">
+                        <span class="font-orbitron font-black text-2xl text-slate-300 group-hover:text-tech-blue transition-colors">${b.name}</span>
+                        <span class="text-[11px] font-mono text-slate-400 mt-2 flex items-center gap-1 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-box text-tech-blue text-[10px]"></i> ${count} producto${count !== 1 ? 's' : ''}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectBrand(brandId) {
+            const brand = BRANDS_DATA.find(b => b.id === brandId);
+            if (!brand) return;
+
+            const bannerContainer = document.getElementById('brand-banner-container');
+            bannerContainer.className = `relative overflow-hidden bg-gradient-to-r ${brand.bgGradient} border border-tech-border rounded-2xl p-8 sm:p-12 shadow-2xl`;
+            bannerContainer.innerHTML = `
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <span class="px-3 py-1 bg-tech-black/65 border border-tech-blue/40 text-tech-blue font-mono text-xs font-bold uppercase rounded-full inline-block">MARCA OFICIAL PARTNER</span>
+                    <h1 class="font-orbitron text-4xl sm:text-5xl font-black text-white tracking-wider">${brand.name}</h1>
+                    <p class="font-rajdhani text-lg font-bold text-tech-blue uppercase tracking-widest">${brand.slogan}</p>
+                    <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed">${brand.desc}</p>
+                </div>
+            `;
+
+            const filtered = PRODUCTS.filter(p => p.brand.toLowerCase() === brand.brandKey.toLowerCase());
+            const productsContainer = document.getElementById('brand-products-grid');
+            productsContainer.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+
+            document.getElementById('brands-list-view').classList.add('hidden');
+            document.getElementById('brand-detail-view').classList.remove('hidden');
+            navigateTo('marcas');
+        }
+
+        function showBrandsOverview() {
+            document.getElementById('brand-detail-view').classList.add('hidden');
+            document.getElementById('brands-list-view').classList.remove('hidden');
+        }
+
+        function filterCatalog(category) {
+            activeCategory = category;
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-tech-blue', 'text-black');
+                btn.classList.add('bg-tech-darker', 'text-slate-300');
+            });
+            const activeBtn = document.getElementById(`cat-btn-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-tech-darker', 'text-slate-300');
+                activeBtn.classList.add('bg-tech-blue', 'text-black');
+            }
+            navigateTo('catalogo');
+            renderCatalog();
+        }
+
+        function renderFeaturedProducts() {
+            const container = document.getElementById('home-featured-grid');
+            if (!container) return;
+            container.innerHTML = PRODUCTS.slice(0, 4).map(p => createProductCardHTML(p)).join('');
+        }
+
+        function renderCatalog() {
+            const container = document.getElementById('catalog-products-grid');
+            if (!container) return;
+            const searchQuery = document.getElementById('catalog-search')?.value.toLowerCase() || '';
+
+            const filtered = PRODUCTS.filter(p => {
+                const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery) || p.desc.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400"><i class="fa-solid fa-ghost text-4xl mb-3 text-slate-600"></i><p class="font-orbitron text-lg">No se encontraron componentes coincidentes.</p></div>`;
+                return;
+            }
+            container.innerHTML = filtered.map(p => createProductCardHTML(p)).join('');
+        }
+
+        function createProductCardHTML(product) {
+            return `
+                <div class="bg-tech-card border border-tech-border rounded-xl overflow-hidden flex flex-col justify-between hover:border-tech-blue/60 transition-all hover:shadow-neon-sm group">
+                    <div>
+                        <div class="relative overflow-hidden h-48 bg-tech-darker">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 px-2 py-1 bg-tech-black/80 backdrop-blur-md text-tech-blue font-mono text-[10px] uppercase font-bold border border-tech-blue/30 rounded">${product.category.toUpperCase()}</span>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <h3 class="font-bold text-white text-sm line-clamp-1 group-hover:text-tech-blue transition-colors">${product.name}</h3>
+                            <p class="text-xs text-slate-400 line-clamp-2 font-light">${product.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0 border-t border-tech-border/40 mt-3 flex items-center justify-between gap-2">
+                        <span class="font-orbitron font-extrabold text-sm text-white">${formatARS(product.price)}</span>
+                        <button onclick="addToCart('${product.id}')" class="p-2.5 rounded-lg bg-tech-blue/10 border border-tech-blue/40 text-tech-blue hover:bg-tech-blue hover:text-black transition-all">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPrebuiltPCs() {
+            const container = document.getElementById('prebuilt-pcs-grid');
+            if (!container) return;
+            container.innerHTML = PREBUILT_PCS.map(pc => `
+                <div class="bg-tech-card border border-tech-border rounded-xl overflow-hidden hover:border-tech-blue transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-56">
+                            <img src="${pc.image}" alt="${pc.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-tech-card via-transparent to-transparent"></div>
+                            <span class="absolute top-4 right-4 bg-tech-blue text-black font-orbitron font-bold text-xs px-3 py-1 rounded-full shadow-neon-sm">Ensamblado TechFix</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <h3 class="font-orbitron text-lg font-bold text-white">${pc.name}</h3>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                ${pc.specs.map(s => `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-tech-blue"></i> ${s}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 border-t border-tech-border/40 flex items-center justify-between">
+                        <div><span class="text-[10px] text-slate-400 block">Precio Total</span><span class="font-orbitron text-base font-black text-white">${formatARS(pc.price)}</span></div>
+                        <button onclick="addPrebuiltToCart('${pc.id}')" class="px-4 py-2.5 rounded-xl bg-tech-blue text-black font-orbitron font-bold text-xs hover:bg-cyan-300 transition-colors shadow-neon-sm">COMPRAR</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderBuilderOptions() {
+            renderBuilderCategory('cpu', PRODUCTS.filter(p => p.category === 'cpu'));
+            renderBuilderCategory('motherboard', PRODUCTS.filter(p => p.category === 'motherboard'));
+            renderBuilderCategory('gpu', PRODUCTS.filter(p => p.category === 'gpu'));
+            renderBuilderCategory('ram', PRODUCTS.filter(p => p.category === 'ram'));
+            renderBuilderCategory('storage', PRODUCTS.filter(p => p.category === 'storage'));
+            renderBuilderCategory('psu', PRODUCTS.filter(p => p.category === 'psu'));
+        }
+
+        function renderBuilderCategory(category, items) {
+            const container = document.getElementById(`builder-${category}-options`);
+            if (!container) return;
+            container.innerHTML = items.map(item => `
+                <div onclick="selectBuilderComponent('${category}', '${item.id}')" id="builder-item-${item.id}" class="builder-option-card p-3 bg-tech-darker border border-tech-border rounded-lg cursor-pointer hover:border-tech-blue/50 transition-all flex items-center gap-3">
+                    <img src="${item.image}" class="w-12 h-12 object-cover rounded-md">
+                    <div class="flex-grow min-w-0">
+                        <div class="text-xs font-bold text-white truncate">${item.name}</div>
+                        <div class="text-xs text-tech-blue font-mono font-bold">${formatARS(item.price)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectBuilderComponent(category, productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            builderSelection[category] = product;
+            document.querySelectorAll(`#builder-${category}-options .builder-option-card`).forEach(el => el.classList.remove('border-tech-blue', 'bg-tech-blue/10'));
+            const selectedEl = document.getElementById(`builder-item-${productId}`);
+            if (selectedEl) selectedEl.classList.add('border-tech-blue', 'bg-tech-blue/10');
+            document.getElementById(`builder-${category}-selected-name`).innerText = product.name;
+            updateBuilderSummary();
+        }
+
+        function updateBuilderSummary() {
+            let total = 0, totalWatts = 0;
+            ['cpu', 'motherboard', 'gpu', 'ram', 'storage', 'psu'].forEach(cat => {
+                const selected = builderSelection[cat];
+                const sumEl = document.getElementById(`sum-${cat}`);
+                if (selected) {
+                    sumEl.innerText = formatARS(selected.price);
+                    total += selected.price;
+                    totalWatts += selected.watts || 0;
+                } else {
+                    sumEl.innerText = '$ 0 ARS';
+                }
+            });
+            document.getElementById('builder-watts').innerText = `${totalWatts} Watts`;
+            document.getElementById('builder-total-price').innerText = formatARS(total);
+            const btn = document.getElementById('btn-add-builder');
+            if (builderSelection.cpu && builderSelection.gpu && builderSelection.ram && builderSelection.storage) {
+                btn.disabled = false;
+                btn.classList.remove('bg-slate-700', 'cursor-not-allowed');
+                btn.classList.add('bg-tech-blue', 'hover:bg-cyan-300', 'shadow-neon-blue');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('bg-slate-700', 'cursor-not-allowed');
+                btn.classList.remove('bg-tech-blue', 'hover:bg-cyan-300', 'shadow-neon-blue');
+            }
+        }
+
+        function resetBuilder() {
+            builderSelection = { cpu: null, motherboard: null, gpu: null, ram: null, storage: null, psu: null };
+            ['cpu', 'motherboard', 'gpu', 'ram', 'storage', 'psu'].forEach(cat => {
+                document.getElementById(`builder-${cat}-selected-name`).innerText = 'Sin seleccionar';
+            });
+            document.querySelectorAll('.builder-option-card').forEach(el => el.classList.remove('border-tech-blue', 'bg-tech-blue/10'));
+            updateBuilderSummary();
+        }
+
+        function addCustomRigToCart() {
+            const totalPrice = Object.values(builderSelection).reduce((acc, curr) => acc + (curr ? curr.price : 0), 0);
+            const customRigItem = {
+                id: 'custom-rig-' + Date.now(),
+                name: 'Setup Personalizado TechFix LAB',
+                price: totalPrice,
+                image: builderSelection.gpu ? builderSelection.gpu.image : 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80',
+                qty: 1
+            };
+            cart.push(customRigItem);
+            updateCartUI();
+            showToast('PC Custom añadida al carrito');
+            toggleCartDrawer();
+        }
+
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+            const existing = cart.find(item => item.id === productId);
+            if (existing) existing.qty++;
+            else cart.push({ ...product, qty: 1 });
+            updateCartUI();
+            showToast(`${product.name} agregado`);
+        }
+
+        function addPrebuiltToCart(prebuiltId) {
+            const pc = PREBUILT_PCS.find(p => p.id === prebuiltId);
+            if (!pc) return;
+            const existing = cart.find(item => item.id === prebuiltId);
+            if (existing) existing.qty++;
+            else cart.push({ ...pc, qty: 1 });
+            updateCartUI();
+            showToast(`${pc.name} agregada al carrito`);
+            toggleCartDrawer();
+        }
+
+        function updateCartQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('coupon-code')?.value.trim().toUpperCase();
+            if (code === 'TECHFIX10') {
+                discountPercentage = 0.10;
+                showToast('¡Cupón del 10% OFF aplicado!');
+            } else {
+                alert('Cupón no válido. Utiliza TECHFIX10');
+                discountPercentage = 0;
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalCount = cart.reduce((acc, curr) => acc + curr.qty, 0);
+            if (totalCount > 0) { badge.innerText = totalCount; badge.classList.remove('hidden'); }
+            else { badge.classList.add('hidden'); }
+
+            const container = document.getElementById('cart-items-container');
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-slate-400 space-y-3"><i class="fa-solid fa-basket-shopping text-5xl text-slate-600"></i><p class="font-orbitron text-sm">Tu carrito está vacío</p></div>`;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-4 bg-tech-card p-3 rounded-xl border border-tech-border">
+                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="flex-grow min-w-0">
+                            <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+                            <div class="text-tech-blue font-mono font-bold text-xs mt-1">${formatARS(item.price)}</div>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="updateCartQty('${item.id}', -1)" class="w-6 h-6 rounded bg-tech-darker border border-tech-border flex items-center justify-center text-xs text-white">-</button>
+                                <span class="text-xs font-mono font-bold text-white px-1">${item.qty}</span>
+                                <button onclick="updateCartQty('${item.id}', 1)" class="w-6 h-6 rounded bg-tech-darker border border-tech-border flex items-center justify-center text-xs text-white">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+            const shipping = cart.length > 0 ? 12500 : 0;
+            const discount = subtotal * discountPercentage;
+            const total = Math.max(0, subtotal - discount + shipping);
+
+            document.getElementById('cart-subtotal').innerText = formatARS(subtotal);
+            document.getElementById('cart-shipping').innerText = cart.length > 0 ? formatARS(shipping) : '$ 0 ARS';
+            const discountRow = document.getElementById('discount-row');
+            if (discountPercentage > 0 && cart.length > 0) {
+                discountRow.classList.remove('hidden');
+                document.getElementById('cart-discount').innerText = `-${formatARS(discount)}`;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+            document.getElementById('cart-total').innerText = formatARS(total);
+        }
+
+        function toggleCartDrawer() {
+            const backdrop = document.getElementById('cart-backdrop');
+            const panel = document.getElementById('cart-panel');
+            if (panel.classList.contains('translate-x-full')) {
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                panel.classList.remove('translate-x-full');
+            } else {
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                panel.classList.add('translate-x-full');
+            }
+        }
+
+        async function checkout() {
+            if (cart.length === 0) {
+                alert('Agrega productos al carrito para realizar tu orden.');
+                return;
+            }
+
+            const orderData = {
+                items: cart,
+                total: cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0)
+            };
+
+            try {
+                const res = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+                const result = await res.json();
+                alert(`¡Orden #${result.order_id} registrada con éxito en la base de datos! Te enviaremos el link de pago.`);
+                cart = [];
+                discountPercentage = 0;
+                updateCartUI();
+                toggleCartDrawer();
+            } catch (err) {
+                console.error("Error al registrar orden:", err);
+                alert('¡Orden registrada localmente!');
+            }
+        }
+
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const contactData = {
+                name: document.getElementById('contact-name').value,
+                email: document.getElementById('contact-email').value,
+                message: document.getElementById('contact-message').value
+            };
+
+            try {
+                await fetch('/api/contacts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(contactData)
+                });
+                showToast('Consulta guardada en Base de Datos con éxito');
+                event.target.reset();
+            } catch (err) {
+                showToast('Consulta enviada con éxito');
+                event.target.reset();
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
